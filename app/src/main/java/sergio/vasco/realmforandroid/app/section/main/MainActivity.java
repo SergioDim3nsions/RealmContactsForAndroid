@@ -1,26 +1,36 @@
 package sergio.vasco.realmforandroid.app.section.main;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyRecyclerAdapter;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyViewHolder;
 import com.carlosdelachica.easyrecycleradapters.decorations.DividerItemDecoration;
+import javax.inject.Inject;
+import javax.inject.Named;
 import sergio.vasco.androidforexample.presentation.model.PresentationContact;
 import sergio.vasco.realmforandroid.R;
+import sergio.vasco.realmforandroid.app.App;
+import sergio.vasco.realmforandroid.app.di.injectableelements.BaseInjectionActivity;
+
+import sergio.vasco.realmforandroid.app.section.main.di.DaggerMainActivityComponent;
+import sergio.vasco.realmforandroid.app.section.main.di.MainActivityComponent;
+import sergio.vasco.realmforandroid.app.section.main.di.MainActivityModule;
 import sergio.vasco.realmforandroid.app.ui.recyclerview.factories.CustomViewHolderFactory;
 import sergio.vasco.realmforandroid.app.ui.recyclerview.viewholders.ContactViewHolder;
 import sergio.vasco.androidforexample.presentation.sections.main.MainView;
 
-public class MainActivity extends AppCompatActivity implements MainView,
+public class MainActivity extends BaseInjectionActivity<MainActivityComponent> implements MainView,
     EasyViewHolder.OnItemClickListener {
+
+  @Inject String prueba;
 
   private EasyRecyclerAdapter adapter;
   @Bind(R.id.recyclerView) RecyclerView recyclerView;
@@ -34,7 +44,11 @@ public class MainActivity extends AppCompatActivity implements MainView,
 
     initAdapter();
     initRecyclerView();
+
+    Toast.makeText(this,prueba,Toast.LENGTH_LONG).show();
   }
+
+
 
   private void initToolbar() {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -86,5 +100,13 @@ public class MainActivity extends AppCompatActivity implements MainView,
 
   @Override public void onItemClick(int position, View view) {
 
+  }
+
+  @Override protected void initDI() {
+    activityComponent = DaggerMainActivityComponent.builder()
+        .sectionActivityComponent(getSectionActivityComponent())
+        .mainActivityModule(new MainActivityModule())
+        .build();
+    activityComponent.inject(this);
   }
 }

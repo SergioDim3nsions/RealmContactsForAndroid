@@ -1,5 +1,6 @@
 package sergio.vasco.androidforexample.presentation.sections.main;
 
+import sergio.vasco.androidforexample.domain.abstractions.Bus;
 import sergio.vasco.androidforexample.presentation.Presenter;
 
 /**
@@ -8,9 +9,11 @@ import sergio.vasco.androidforexample.presentation.Presenter;
  */
 public class MainPresenter extends Presenter{
   private MainView view;
+  private Bus bus;
 
-  public MainPresenter(MainView view) {
+  public MainPresenter(MainView view, Bus bus) {
     this.view = view;
+    this.bus = bus;
   }
 
   public void getContactsFromDataBase(){
@@ -19,10 +22,10 @@ public class MainPresenter extends Presenter{
   }
 
   @Override public void onResume() {
-
+    //bus.register(this);
   }
 
   @Override public void onPause() {
-
+    //bus.unregister(this);
   }
 }

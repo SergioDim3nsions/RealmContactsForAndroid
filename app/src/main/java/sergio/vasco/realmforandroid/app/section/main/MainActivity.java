@@ -16,6 +16,7 @@ import com.carlosdelachica.easyrecycleradapters.decorations.DividerItemDecoratio
 import javax.inject.Inject;
 import javax.inject.Named;
 import sergio.vasco.androidforexample.presentation.model.PresentationContact;
+import sergio.vasco.androidforexample.presentation.sections.main.MainPresenter;
 import sergio.vasco.realmforandroid.R;
 import sergio.vasco.realmforandroid.app.App;
 import sergio.vasco.realmforandroid.app.di.injectableelements.BaseInjectionActivity;
@@ -30,7 +31,7 @@ import sergio.vasco.androidforexample.presentation.sections.main.MainView;
 public class MainActivity extends BaseInjectionActivity<MainActivityComponent> implements MainView,
     EasyViewHolder.OnItemClickListener {
 
-  @Inject String prueba;
+  @Inject MainPresenter presenter;
 
   private EasyRecyclerAdapter adapter;
   @Bind(R.id.recyclerView) RecyclerView recyclerView;
@@ -44,11 +45,17 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
 
     initAdapter();
     initRecyclerView();
-
-    Toast.makeText(this,prueba,Toast.LENGTH_LONG).show();
   }
 
+  @Override protected void onResume() {
+    super.onResume();
+    presenter.onResume();
+  }
 
+  @Override protected void onPause() {
+    super.onPause();
+    presenter.onPause();
+  }
 
   private void initToolbar() {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -105,7 +112,7 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
   @Override protected void initDI() {
     activityComponent = DaggerMainActivityComponent.builder()
         .sectionActivityComponent(getSectionActivityComponent())
-        .mainActivityModule(new MainActivityModule())
+        .mainActivityModule(new MainActivityModule(this))
         .build();
     activityComponent.inject(this);
   }

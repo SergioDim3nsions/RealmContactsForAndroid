@@ -10,6 +10,6 @@ import sergio.vasco.realmforandroid.app.di.scopes.PerSectionInActivity;
  * Date: 15/1/16.
  */
 @PerSectionInActivity @Component(dependencies = AppComponent.class, modules = SectionActivityModule.class)
-public interface SectionActivityComponent {
+public interface SectionActivityComponent extends AppComponent{
   void inject(App app);
 }

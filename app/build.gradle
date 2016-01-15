@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
   compileSdkVersion parent.ext.androidCompileSdkVersion
@@ -48,4 +49,13 @@ dependencies {
   compile parent.ext.libEasyRecyclerView
   compile parent.ext.libPicasso
   compile parent.ext.libCalligraphy
+
+  //Dagger
+  apt parent.ext.libDaggerCompiler
+  compile parent.ext.libDagger
+  provided parent.ext.libJavaxAnnotation
+
+  compile project(':presentation')
+  compile project(':data')
+
 }

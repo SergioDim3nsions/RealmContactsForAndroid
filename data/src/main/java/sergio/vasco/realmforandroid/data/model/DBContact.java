@@ -1,15 +1,11 @@
-package sergio.vasco.realmforandroid.domain.model;
-
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+package sergio.vasco.realmforandroid.data.model;
 
 /**
  * Name: Sergio Vasco
  * Date: 14/1/16.
  */
-public class Contact extends RealmObject {
+public class DBContact {
 
-  @PrimaryKey
   private int idContact;
   private String firstName;
   private String lastName;

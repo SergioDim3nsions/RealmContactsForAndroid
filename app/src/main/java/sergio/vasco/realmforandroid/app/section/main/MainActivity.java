@@ -13,18 +13,15 @@ import butterknife.ButterKnife;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyRecyclerAdapter;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyViewHolder;
 import com.carlosdelachica.easyrecycleradapters.decorations.DividerItemDecoration;
-import java.util.List;
+import sergio.vasco.androidforexample.presentation.model.PresentationContact;
 import sergio.vasco.realmforandroid.R;
 import sergio.vasco.realmforandroid.app.ui.recyclerview.factories.CustomViewHolderFactory;
 import sergio.vasco.realmforandroid.app.ui.recyclerview.viewholders.ContactViewHolder;
-import sergio.vasco.realmforandroid.domain.model.Contact;
-import sergio.vasco.realmforandroid.presentation.section.main.MainPresentation;
-import sergio.vasco.realmforandroid.presentation.section.main.MainView;
+import sergio.vasco.androidforexample.presentation.sections.main.MainView;
 
 public class MainActivity extends AppCompatActivity implements MainView,
     EasyViewHolder.OnItemClickListener {
 
-  private MainPresentation presenter;
   private EasyRecyclerAdapter adapter;
   @Bind(R.id.recyclerView) RecyclerView recyclerView;
 
@@ -33,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements MainView,
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
 
-    presenter = new MainPresentation(this);
     initToolbar();
 
     initAdapter();
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements MainView,
   private void initAdapter() {
     adapter = new EasyRecyclerAdapter(
         new CustomViewHolderFactory(this),
-        Contact.class,
+        PresentationContact.class,
         ContactViewHolder.class);
     adapter.setOnClickListener(this);
   }
@@ -86,10 +82,6 @@ public class MainActivity extends AppCompatActivity implements MainView,
 
   @Override public void hideLoader() {
 
-  }
-
-  @Override public void loadContacts(List<Contact> contactsList) {
-    adapter.addAll(contactsList);
   }
 
   @Override public void onItemClick(int position, View view) {

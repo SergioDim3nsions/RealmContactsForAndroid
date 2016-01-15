@@ -4,10 +4,10 @@ import android.content.Context;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyViewHolder;
+import sergio.vasco.androidforexample.presentation.model.PresentationContact;
 import sergio.vasco.realmforandroid.R;
-import sergio.vasco.realmforandroid.domain.model.Contact;
 
-public class ContactViewHolder extends EasyViewHolder<Contact> {
+public class ContactViewHolder extends EasyViewHolder<PresentationContact> {
 
     private Context context;
 
@@ -17,7 +17,7 @@ public class ContactViewHolder extends EasyViewHolder<Contact> {
         ButterKnife.bind(this, itemView);
     }
 
-    @Override public void bindTo(Contact value) {
+    @Override public void bindTo(PresentationContact value) {
 
     }
 

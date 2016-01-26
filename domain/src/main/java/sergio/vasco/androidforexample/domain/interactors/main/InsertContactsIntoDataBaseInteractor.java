@@ -1,31 +1,30 @@
 package sergio.vasco.androidforexample.domain.interactors.main;
 
-import java.util.List;
 import sergio.vasco.androidforexample.domain.abstractions.Bus;
 import sergio.vasco.androidforexample.domain.interactors.Interactor;
-import sergio.vasco.androidforexample.domain.interactors.main.events.GetContactsEvent;
 import sergio.vasco.androidforexample.domain.model.Contact;
 import sergio.vasco.androidforexample.domain.repository.ContactsRepository;
 
 /**
  * Name: Sergio Vasco
- * Date: 15/1/16.
+ * Date: 26/1/16.
  */
-public class GetContactsFromDataBaseInteractor implements Interactor {
+public class InsertContactsIntoDataBaseInteractor implements Interactor {
 
-  private Bus bus;
-  private GetContactsEvent event;
+  private Contact contact;
   private ContactsRepository contactsRepository;
+  private Bus bus;
 
-  public GetContactsFromDataBaseInteractor(Bus bus, ContactsRepository contactsRepository) {
+  public InsertContactsIntoDataBaseInteractor(Bus bus,ContactsRepository contactsRepository) {
     this.bus = bus;
     this.contactsRepository = contactsRepository;
-    this.event = new GetContactsEvent();
   }
 
   @Override public void execute() throws Throwable {
-    List<Contact> contactList = contactsRepository.getContacts();
-    event.setContactList(contactList);
-    bus.post(event);
+    contactsRepository.insertContact(contact);
+  }
+
+  public void setContact(Contact contact) {
+    this.contact = contact;
   }
 }

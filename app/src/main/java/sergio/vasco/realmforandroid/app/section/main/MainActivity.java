@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyRecyclerAdapter;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyViewHolder;
 import com.carlosdelachica.easyrecycleradapters.decorations.DividerItemDecoration;
+import java.util.List;
 import javax.inject.Inject;
 import sergio.vasco.androidforexample.presentation.model.PresentationContact;
 import sergio.vasco.androidforexample.presentation.sections.main.MainPresenter;
@@ -42,11 +43,14 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
 
     initAdapter();
     initRecyclerView();
+
+    addContactsMock();
   }
 
   @Override protected void onResume() {
     super.onResume();
     presenter.onResume();
+    presenter.getContactsFromDataBase();
   }
 
   @Override protected void onPause() {
@@ -100,6 +104,20 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
 
   @Override public void hideLoader() {
 
+  }
+
+  private void addContactsMock(){
+    PresentationContact presentationContact = new PresentationContact();
+    presentationContact.setIdContact(1);
+    presentationContact.setFirstName("Sergio");
+    presentationContact.setLastName("Vasco Portillo");
+    presentationContact.setEmail("SergioVascoPortillo@gmail.com");
+    presentationContact.setPhone(649642604);
+    presenter.insertContactIntoDataBase(presentationContact);
+  }
+
+  @Override public void loadContacts(List<PresentationContact> contactList) {
+    adapter.addAll(contactList);
   }
 
   @Override public void onItemClick(int position, View view) {

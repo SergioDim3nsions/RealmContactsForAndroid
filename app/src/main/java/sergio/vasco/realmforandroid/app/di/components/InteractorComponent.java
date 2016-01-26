@@ -1,6 +1,7 @@
 package sergio.vasco.realmforandroid.app.di.components;
 
 import sergio.vasco.androidforexample.domain.interactors.main.GetContactsFromDataBaseInteractor;
+import sergio.vasco.androidforexample.domain.interactors.main.InsertContactsIntoDataBaseInteractor;
 
 /**
  * Name: Sergio Vasco
@@ -8,4 +9,5 @@ import sergio.vasco.androidforexample.domain.interactors.main.GetContactsFromDat
  */
 public interface InteractorComponent {
   GetContactsFromDataBaseInteractor provideGetContactsFromDataBaseInteractor();
+  InsertContactsIntoDataBaseInteractor provideInsertContactsIntoDataBaseInteractor();
 }

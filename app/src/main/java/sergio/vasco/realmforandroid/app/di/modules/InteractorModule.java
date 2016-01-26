@@ -5,6 +5,8 @@ import dagger.Provides;
 import javax.inject.Singleton;
 import sergio.vasco.androidforexample.domain.abstractions.Bus;
 import sergio.vasco.androidforexample.domain.interactors.main.GetContactsFromDataBaseInteractor;
+import sergio.vasco.androidforexample.domain.interactors.main.InsertContactsIntoDataBaseInteractor;
+import sergio.vasco.androidforexample.domain.repository.ContactsRepository;
 
 /**
  * Name: Sergio Vasco
@@ -13,7 +15,11 @@ import sergio.vasco.androidforexample.domain.interactors.main.GetContactsFromDat
 @Module
 public class InteractorModule {
 
-  @Singleton @Provides GetContactsFromDataBaseInteractor provideGetContactsFromDataBaseInteractor(Bus bus){
-    return new GetContactsFromDataBaseInteractor(bus);
+  @Singleton @Provides GetContactsFromDataBaseInteractor provideGetContactsFromDataBaseInteractor(Bus bus, ContactsRepository contactsRepository){
+    return new GetContactsFromDataBaseInteractor(bus, contactsRepository);
+  }
+
+  @Singleton @Provides InsertContactsIntoDataBaseInteractor provideInsertContactsIntoDataBaseInteractor(Bus bus, ContactsRepository contactsRepository){
+    return new InsertContactsIntoDataBaseInteractor(bus, contactsRepository);
   }
 }

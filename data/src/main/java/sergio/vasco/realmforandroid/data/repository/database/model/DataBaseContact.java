@@ -1,10 +1,12 @@
-package sergio.vasco.androidforexample.presentation.model;
+package sergio.vasco.realmforandroid.data.repository.database.model;
+
+import io.realm.RealmObject;
 
 /**
  * Name: Sergio Vasco
- * Date: 15/1/16.
+ * Date: 14/1/16.
  */
-public class PresentationContact {
+public class DataBaseContact extends RealmObject {
 
   private int idContact;
   private String firstName;

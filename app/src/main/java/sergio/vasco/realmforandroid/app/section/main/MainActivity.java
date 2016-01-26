@@ -7,18 +7,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyRecyclerAdapter;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyViewHolder;
 import com.carlosdelachica.easyrecycleradapters.decorations.DividerItemDecoration;
 import javax.inject.Inject;
-import javax.inject.Named;
 import sergio.vasco.androidforexample.presentation.model.PresentationContact;
 import sergio.vasco.androidforexample.presentation.sections.main.MainPresenter;
 import sergio.vasco.realmforandroid.R;
-import sergio.vasco.realmforandroid.app.App;
 import sergio.vasco.realmforandroid.app.di.injectableelements.BaseInjectionActivity;
 
 import sergio.vasco.realmforandroid.app.section.main.di.DaggerMainActivityComponent;
@@ -111,7 +108,7 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
 
   @Override protected void initDI() {
     activityComponent = DaggerMainActivityComponent.builder()
-        .sectionActivityComponent(getSectionActivityComponent())
+        .appComponent(getAppComponent())
         .mainActivityModule(new MainActivityModule(this))
         .build();
     activityComponent.inject(this);

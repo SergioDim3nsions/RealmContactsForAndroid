@@ -17,5 +17,8 @@ dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
   testCompile 'junit:junit:4.12'
 
+  compile parent.ext.libRealm
+
   compile project(':repository')
+
 }

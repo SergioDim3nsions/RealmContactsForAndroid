@@ -1,6 +1,7 @@
 package sergio.vasco.realmforandroid.app;
 
 import android.app.Application;
+
 import sergio.vasco.realmforandroid.app.di.components.AppComponent;
 import sergio.vasco.realmforandroid.app.di.components.DaggerAppComponent;
 import sergio.vasco.realmforandroid.app.di.modules.AppModule;

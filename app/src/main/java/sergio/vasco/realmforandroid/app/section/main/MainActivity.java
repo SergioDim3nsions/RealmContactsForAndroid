@@ -1,6 +1,8 @@
 package sergio.vasco.realmforandroid.app.section.main;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,29 +24,40 @@ import sergio.vasco.realmforandroid.app.di.injectableelements.BaseInjectionActiv
 import sergio.vasco.realmforandroid.app.section.main.di.DaggerMainActivityComponent;
 import sergio.vasco.realmforandroid.app.section.main.di.MainActivityComponent;
 import sergio.vasco.realmforandroid.app.section.main.di.MainActivityModule;
+import sergio.vasco.realmforandroid.app.section.profile.ProfileActivity;
 import sergio.vasco.realmforandroid.app.ui.recyclerview.factories.CustomViewHolderFactory;
 import sergio.vasco.realmforandroid.app.ui.recyclerview.viewholders.ContactViewHolder;
 import sergio.vasco.androidforexample.presentation.sections.main.MainView;
 
 public class MainActivity extends BaseInjectionActivity<MainActivityComponent> implements MainView,
-    EasyViewHolder.OnItemClickListener {
+    EasyViewHolder.OnItemClickListener, View.OnClickListener {
 
   @Inject MainPresenter presenter;
 
   private EasyRecyclerAdapter adapter;
   @Bind(R.id.recyclerView) RecyclerView recyclerView;
+  @Bind(R.id.fab) FloatingActionButton fab;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
 
-    initToolbar();
+    initUI();
+  }
 
+  @Override protected void initToolbar() {
+    toolbar.setTitle(getString(R.string.app_name));
+    setSupportActionBar(toolbar);
+  }
+
+  private void initUI() {
+    initListeners();
     initAdapter();
     initRecyclerView();
+  }
 
-    addContactsMock();
+  private void initListeners() {
+    fab.setOnClickListener(this);
   }
 
   @Override protected void onResume() {
@@ -58,10 +71,6 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
     presenter.onPause();
   }
 
-  private void initToolbar() {
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-  }
 
   private void initAdapter() {
     adapter = new EasyRecyclerAdapter(
@@ -78,41 +87,12 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
     recyclerView.addItemDecoration(new DividerItemDecoration(this));
   }
 
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.menu_main, menu);
-    return true;
-  }
-
-  @Override public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
-    }
-
-    return super.onOptionsItemSelected(item);
-  }
-
   @Override public void showLoader() {
 
   }
 
   @Override public void hideLoader() {
 
-  }
-
-  private void addContactsMock(){
-    PresentationContact presentationContact = new PresentationContact();
-    presentationContact.setFirstName("Sergio");
-    presentationContact.setLastName("Wololo");
-    presentationContact.setEmail("SergioVascoPortillo@gmail.com");
-    presentationContact.setPhone(649642604);
-    presenter.insertContactIntoDataBase(presentationContact);
   }
 
   @Override public void loadContacts(List<PresentationContact> contactList) {
@@ -129,5 +109,10 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
         .mainActivityModule(new MainActivityModule(this))
         .build();
     activityComponent.inject(this);
+  }
+
+  @Override public void onClick(View v) {
+    Intent i = new Intent(this,ProfileActivity.class);
+    startActivity(i);
   }
 }

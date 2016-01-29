@@ -9,10 +9,64 @@
     android:layout_height="match_parent"
     tools:context=".app.section.profile.ProfileActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+  <LinearLayout android:layout_width="match_parent"
+      android:orientation="vertical"
+      android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
         android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text"/>
+        android:layout_height="wrap_content">
+
+      <EditText
+          android:id="@+id/firstName"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="text"
+          android:hint="@string/first_name"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_height="wrap_content">
+
+      <EditText
+          android:id="@+id/lastName"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="text"
+          android:hint="@string/last_name"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_height="wrap_content">
+
+      <EditText
+          android:id="@+id/phone"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="phone"
+          android:hint="@string/phone_number"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+        android:layout_margin="@dimen/text_margin"
+        android:layout_height="wrap_content">
+
+      <EditText
+          android:id="@+id/email"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="textEmailAddress"
+          android:hint="@string/email"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+  </LinearLayout>
+
 
 </android.support.v4.widget.NestedScrollView>

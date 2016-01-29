@@ -108,9 +108,8 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
 
   private void addContactsMock(){
     PresentationContact presentationContact = new PresentationContact();
-    presentationContact.setIdContact(1);
     presentationContact.setFirstName("Sergio");
-    presentationContact.setLastName("Vasco Portillo");
+    presentationContact.setLastName("Wololo");
     presentationContact.setEmail("SergioVascoPortillo@gmail.com");
     presentationContact.setPhone(649642604);
     presenter.insertContactIntoDataBase(presentationContact);

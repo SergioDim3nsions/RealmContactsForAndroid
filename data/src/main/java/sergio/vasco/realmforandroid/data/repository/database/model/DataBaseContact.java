@@ -1,6 +1,7 @@
 package sergio.vasco.realmforandroid.data.repository.database.model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Name: Sergio Vasco
@@ -8,6 +9,7 @@ import io.realm.RealmObject;
  */
 public class DataBaseContact extends RealmObject {
 
+  @PrimaryKey
   private int idContact;
   private String firstName;
   private String lastName;

@@ -11,6 +11,7 @@ public interface DataBaseService {
   void getInstance();
   void insert(RealmObject table);
   <E extends RealmObject> RealmResults<E> query (Class<E> genericClass);
+  <E extends RealmObject> int getNextId(String idName, Class<E> genericClass);
   void beginTransaction();
   void commitTransaction();
 }

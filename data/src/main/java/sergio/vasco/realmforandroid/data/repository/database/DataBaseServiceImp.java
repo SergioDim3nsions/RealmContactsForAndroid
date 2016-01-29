@@ -36,6 +36,14 @@ public class DataBaseServiceImp implements DataBaseService {
     return query.findAll();
   }
 
+  @Override public <E extends RealmObject> int getNextId(String idName, Class<E> genericClass) {
+    getInstance();
+    if(realm.where(genericClass).findAll().size() == 0){
+      return 1;
+    }
+    return realm.where(genericClass).max(idName).intValue() + 1;
+  }
+
   @Override public void beginTransaction() {
     realm.beginTransaction();
   }

@@ -25,6 +25,8 @@ public class ContactsDataSourceImp implements ContactsDataSource {
 
   @Override public void insertContact(Contact contact) {
     DataBaseContact dataBaseContact = contactMapper.contactToDataBaseContact(contact);
+    int nextId = dataBaseService.getNextId("idContact", DataBaseContact.class);
+    dataBaseContact.setIdContact(nextId);
     dataBaseService.insert(dataBaseContact);
   }
 

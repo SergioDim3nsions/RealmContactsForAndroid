@@ -1,6 +1,5 @@
 package sergio.vasco.androidforexample.presentation.sections.main;
 
-import java.util.ArrayList;
 import java.util.List;
 import sergio.vasco.androidforexample.domain.abstractions.Bus;
 import sergio.vasco.androidforexample.domain.interactors.InteractorInvoker;
@@ -16,7 +15,7 @@ import sergio.vasco.androidforexample.presentation.model.PresentationContact;
  * Name: Sergio Vasco
  * Date: 14/1/16.
  */
-public class MainPresenter extends Presenter{
+public class MainPresenter extends Presenter {
   private MainView view;
   private Bus bus;
   private InteractorInvoker interactorInvoker;
@@ -24,7 +23,9 @@ public class MainPresenter extends Presenter{
   private GetContactsFromDataBaseInteractor getContactsFromDataBaseInteractor;
   private ContactMapper contactMapper;
 
-  public MainPresenter(MainView view, Bus bus,InteractorInvoker interactorInvoker,InsertContactsIntoDataBaseInteractor insertContactsIntoDataBaseInteractor, GetContactsFromDataBaseInteractor getContactsFromDataBaseInteractor) {
+  public MainPresenter(MainView view, Bus bus, InteractorInvoker interactorInvoker,
+      InsertContactsIntoDataBaseInteractor insertContactsIntoDataBaseInteractor,
+      GetContactsFromDataBaseInteractor getContactsFromDataBaseInteractor) {
     this.view = view;
     this.bus = bus;
     this.interactorInvoker = interactorInvoker;
@@ -33,13 +34,13 @@ public class MainPresenter extends Presenter{
     this.contactMapper = new ContactMapper();
   }
 
-  public void insertContactIntoDataBase(PresentationContact presentationContact){
+  public void insertContactIntoDataBase(PresentationContact presentationContact) {
     Contact contact = contactMapper.presentationContactToContact(presentationContact);
     insertContactsIntoDataBaseInteractor.setContact(contact);
     interactorInvoker.execute(insertContactsIntoDataBaseInteractor);
   }
 
-  public void getContactsFromDataBase(){
+  public void getContactsFromDataBase() {
     interactorInvoker.execute(getContactsFromDataBaseInteractor);
   }
 
@@ -51,19 +52,13 @@ public class MainPresenter extends Presenter{
     bus.unregister(this);
   }
 
-  public void onEvent(GetContactsEvent event){
-    if(event.getError() == null){
-
-      List<PresentationContact> presentationContactList = new ArrayList<>();
-
+  public void onEvent(GetContactsEvent event) {
+    if (event.getError() == null) {
       List<Contact> contactList = event.getContactList();
-      for (Contact contact : contactList) {
-        PresentationContact presentationContact = contactMapper.contactToPresentationContact(contact);
-        presentationContactList.add(presentationContact);
-      }
+      List<PresentationContact> presentationContactList =
+          contactMapper.ContactsListToPresentationContactList(contactList);
 
       view.loadContacts(presentationContactList);
     }
   }
-
 }

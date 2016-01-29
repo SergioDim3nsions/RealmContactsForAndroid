@@ -1,5 +1,7 @@
 package sergio.vasco.androidforexample.presentation.mappers;
 
+import java.util.ArrayList;
+import java.util.List;
 import sergio.vasco.androidforexample.domain.model.Contact;
 import sergio.vasco.androidforexample.presentation.model.PresentationContact;
 
@@ -27,5 +29,15 @@ public class ContactMapper {
     presentationContact.setEmail(contact.getEmail());
     presentationContact.setPhone(contact.getPhone());
     return presentationContact;
+  }
+
+  public List<PresentationContact> ContactsListToPresentationContactList(List<Contact> contactList){
+    List<PresentationContact> presentationContactList = new ArrayList<>();
+
+    for (Contact contact : contactList) {
+      PresentationContact presentationContact = contactToPresentationContact(contact);
+      presentationContactList.add(presentationContact);
+    }
+    return presentationContactList;
   }
 }

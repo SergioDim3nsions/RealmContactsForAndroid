@@ -12,7 +12,7 @@ import sergio.vasco.realmforandroid.data.repository.database.datasources.Contact
  * Date: 26/1/16.
  */
 @Module
-public class DataSourceComponent {
+public class DataSourceModule {
 
   @Singleton @Provides ContactsDataSource provideContactsDataSource(DataBaseService dataBaseService){
     return new ContactsDataSourceImp(dataBaseService);

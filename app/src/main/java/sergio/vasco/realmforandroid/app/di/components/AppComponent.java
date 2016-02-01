@@ -5,8 +5,9 @@ import javax.inject.Singleton;
 import sergio.vasco.realmforandroid.app.App;
 import sergio.vasco.realmforandroid.app.di.modules.AppModule;
 import sergio.vasco.realmforandroid.app.di.modules.DataModule;
-import sergio.vasco.realmforandroid.app.di.modules.DataSourceComponent;
+import sergio.vasco.realmforandroid.app.di.modules.DataSourceModule;
 import sergio.vasco.realmforandroid.app.di.modules.InteractorModule;
+import sergio.vasco.realmforandroid.app.di.modules.MapperModule;
 import sergio.vasco.realmforandroid.app.di.modules.RepositoryModule;
 
 /**
@@ -15,8 +16,8 @@ import sergio.vasco.realmforandroid.app.di.modules.RepositoryModule;
  */
 
 @Singleton @Component(modules = {AppModule.class, DataModule.class, InteractorModule.class,
-    RepositoryModule.class, DataSourceComponent.class})
+    RepositoryModule.class, DataSourceModule.class, MapperModule.class})
 public interface AppComponent extends InteractorComponent, DataComponent,
-    sergio.vasco.realmforandroid.app.di.components.DataSourceComponent, RepositoryComponent {
+    DataSourceComponent, RepositoryComponent, MapperComponent {
   void inject(App app);
 }

@@ -5,12 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyRecyclerAdapter;
 import com.carlosdelachica.easyrecycleradapters.adapter.EasyViewHolder;
 import com.carlosdelachica.easyrecycleradapters.decorations.DividerItemDecoration;
@@ -24,7 +20,7 @@ import sergio.vasco.realmforandroid.app.di.injectableelements.BaseInjectionActiv
 import sergio.vasco.realmforandroid.app.section.main.di.DaggerMainActivityComponent;
 import sergio.vasco.realmforandroid.app.section.main.di.MainActivityComponent;
 import sergio.vasco.realmforandroid.app.section.main.di.MainActivityModule;
-import sergio.vasco.realmforandroid.app.section.profile.ProfileActivity;
+import sergio.vasco.realmforandroid.app.section.profile.create.CreateContactActivity;
 import sergio.vasco.realmforandroid.app.ui.recyclerview.factories.CustomViewHolderFactory;
 import sergio.vasco.realmforandroid.app.ui.recyclerview.viewholders.ContactViewHolder;
 import sergio.vasco.androidforexample.presentation.sections.main.MainView;
@@ -112,7 +108,7 @@ public class MainActivity extends BaseInjectionActivity<MainActivityComponent> i
   }
 
   @Override public void onClick(View v) {
-    Intent i = new Intent(this,ProfileActivity.class);
+    Intent i = new Intent(this,CreateContactActivity.class);
     startActivity(i);
   }
 }

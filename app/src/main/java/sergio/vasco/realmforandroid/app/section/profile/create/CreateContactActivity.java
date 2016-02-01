@@ -1,26 +1,28 @@
-package sergio.vasco.realmforandroid.app.section.profile;
+package sergio.vasco.realmforandroid.app.section.profile.create;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.EditText;
 import butterknife.Bind;
 import javax.inject.Inject;
 import sergio.vasco.androidforexample.presentation.sections.profile.ProfilePresenter;
 import sergio.vasco.androidforexample.presentation.sections.profile.ProfileView;
 import sergio.vasco.realmforandroid.R;
-import sergio.vasco.realmforandroid.app.di.injectableelements.BaseInjectionActivity;
-import sergio.vasco.realmforandroid.app.section.profile.di.DaggerProfileActivityComponent;
-import sergio.vasco.realmforandroid.app.section.profile.di.ProfileActivityComponent;
-import sergio.vasco.realmforandroid.app.section.profile.di.ProfileActivityModule;
+import sergio.vasco.realmforandroid.app.section.profile.BaseContactActivity;
 
-public class ProfileActivity extends BaseInjectionActivity<ProfileActivityComponent> implements ProfileView {
+import sergio.vasco.realmforandroid.app.section.profile.create.di.CreateContactActivityModule;
+import sergio.vasco.realmforandroid.app.section.profile.create.di.CreateContactActivityComponent;
+import sergio.vasco.realmforandroid.app.section.profile.create.di.DaggerCreateContactActivityComponent;
+
+public class CreateContactActivity extends BaseContactActivity<CreateContactActivityComponent>
+    implements ProfileView {
 
   @Inject ProfilePresenter presenter;
+  @Bind(R.id.firstName) EditText firstName;
+  @Bind(R.id.lastName) EditText lastName;
+  @Bind(R.id.phone) EditText phone;
+  @Bind(R.id.email) EditText email;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -35,14 +37,6 @@ public class ProfileActivity extends BaseInjectionActivity<ProfileActivityCompon
   @Override protected void onPause() {
     super.onPause();
     presenter.onPause();
-  }
-
-  @Override protected void initDI() {
-    activityComponent = DaggerProfileActivityComponent.builder()
-        .appComponent(getAppComponent())
-        .profileActivityModule(new ProfileActivityModule(this))
-        .build();
-    activityComponent.inject(this);
   }
 
   @Override protected void initToolbar() {
@@ -68,5 +62,13 @@ public class ProfileActivity extends BaseInjectionActivity<ProfileActivityCompon
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override protected void initDI() {
+    activityComponent = DaggerCreateContactActivityComponent.builder()
+        .createContactActivityModule(new CreateContactActivityModule(this))
+        .appComponent(getAppComponent())
+        .build();
+    activityComponent.inject(this);
   }
 }

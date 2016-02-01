@@ -96,4 +96,5 @@
   <string name="phone_number">Movil</string>
   <string name="email">Email</string>
   <string name="new_contact_title">Nuevo contacto</string>
+  <string name="edit_contact_title">Editar contacto</string>
 </resources>

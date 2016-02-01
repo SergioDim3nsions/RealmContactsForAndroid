@@ -7,7 +7,7 @@ import sergio.vasco.realmforandroid.data.repository.database.model.DataBaseConta
  * Name: Sergio Vasco
  * Date: 26/1/16.
  */
-public class ContactMapper {
+public class DataContactMapper {
 
   public Contact dataBaseContactToContact(DataBaseContact dataBaseContact){
     Contact contact = new Contact();

@@ -22,7 +22,7 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".app.section.profile.ProfileActivity"
+        android:name=".app.section.profile.create.CreateContactActivity"
         android:label="@string/title_activity_profile"
         android:theme="@style/AppTheme.NoActionBar">
     </activity>

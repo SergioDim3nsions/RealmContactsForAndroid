@@ -7,7 +7,7 @@ import sergio.vasco.androidforexample.domain.model.Contact;
 import sergio.vasco.androidforexample.repository.datasources.ContactsDataSource;
 import sergio.vasco.realmforandroid.data.repository.database.DataBaseService;
 import sergio.vasco.realmforandroid.data.repository.database.model.DataBaseContact;
-import sergio.vasco.realmforandroid.data.repository.database.model.mappers.ContactMapper;
+import sergio.vasco.realmforandroid.data.repository.database.model.mappers.DataContactMapper;
 
 /**
  * Name: Sergio Vasco
@@ -16,15 +16,15 @@ import sergio.vasco.realmforandroid.data.repository.database.model.mappers.Conta
 public class ContactsDataSourceImp implements ContactsDataSource {
 
   private DataBaseService dataBaseService;
-  private ContactMapper contactMapper;
+  private DataContactMapper dataContactMapper;
 
   public ContactsDataSourceImp(DataBaseService dataBaseService) {
     this.dataBaseService = dataBaseService;
-    this.contactMapper = new ContactMapper();
+    this.dataContactMapper = new DataContactMapper();
   }
 
   @Override public void insertContact(Contact contact) {
-    DataBaseContact dataBaseContact = contactMapper.contactToDataBaseContact(contact);
+    DataBaseContact dataBaseContact = dataContactMapper.contactToDataBaseContact(contact);
     int nextId = dataBaseService.getNextId("idContact", DataBaseContact.class);
     dataBaseContact.setIdContact(nextId);
     dataBaseService.insert(dataBaseContact);
@@ -43,7 +43,7 @@ public class ContactsDataSourceImp implements ContactsDataSource {
 
     RealmResults<DataBaseContact> resultsList = dataBaseService.query(DataBaseContact.class);
     for (DataBaseContact dataBaseContact : resultsList) {
-      Contact contact = contactMapper.dataBaseContactToContact(dataBaseContact);
+      Contact contact = dataContactMapper.dataBaseContactToContact(dataBaseContact);
       contactList.add(contact);
     }
 

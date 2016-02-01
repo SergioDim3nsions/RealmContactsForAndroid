@@ -9,7 +9,7 @@ import sergio.vasco.androidforexample.presentation.model.PresentationContact;
  * Name: Sergio Vasco
  * Date: 26/1/16.
  */
-public class ContactMapper {
+public class PresentationContactMapper {
 
   public Contact presentationContactToContact(PresentationContact presentationContact){
     Contact contact = new Contact();

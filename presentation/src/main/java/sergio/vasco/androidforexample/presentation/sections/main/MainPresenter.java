@@ -8,7 +8,7 @@ import sergio.vasco.androidforexample.domain.interactors.main.InsertContactsInto
 import sergio.vasco.androidforexample.domain.interactors.main.events.GetContactsEvent;
 import sergio.vasco.androidforexample.domain.model.Contact;
 import sergio.vasco.androidforexample.presentation.Presenter;
-import sergio.vasco.androidforexample.presentation.mappers.ContactMapper;
+import sergio.vasco.androidforexample.presentation.mappers.PresentationContactMapper;
 import sergio.vasco.androidforexample.presentation.model.PresentationContact;
 
 /**
@@ -21,21 +21,21 @@ public class MainPresenter extends Presenter {
   private InteractorInvoker interactorInvoker;
   private InsertContactsIntoDataBaseInteractor insertContactsIntoDataBaseInteractor;
   private GetContactsFromDataBaseInteractor getContactsFromDataBaseInteractor;
-  private ContactMapper contactMapper;
+  private PresentationContactMapper presentationContactMapper;
 
   public MainPresenter(MainView view, Bus bus, InteractorInvoker interactorInvoker,
       InsertContactsIntoDataBaseInteractor insertContactsIntoDataBaseInteractor,
-      GetContactsFromDataBaseInteractor getContactsFromDataBaseInteractor) {
+      GetContactsFromDataBaseInteractor getContactsFromDataBaseInteractor, PresentationContactMapper presentationContactMapper) {
     this.view = view;
     this.bus = bus;
     this.interactorInvoker = interactorInvoker;
     this.insertContactsIntoDataBaseInteractor = insertContactsIntoDataBaseInteractor;
     this.getContactsFromDataBaseInteractor = getContactsFromDataBaseInteractor;
-    this.contactMapper = new ContactMapper();
+    this.presentationContactMapper = presentationContactMapper;
   }
 
   public void insertContactIntoDataBase(PresentationContact presentationContact) {
-    Contact contact = contactMapper.presentationContactToContact(presentationContact);
+    Contact contact = presentationContactMapper.presentationContactToContact(presentationContact);
     insertContactsIntoDataBaseInteractor.setContact(contact);
     interactorInvoker.execute(insertContactsIntoDataBaseInteractor);
   }
@@ -56,7 +56,7 @@ public class MainPresenter extends Presenter {
     if (event.getError() == null) {
       List<Contact> contactList = event.getContactList();
       List<PresentationContact> presentationContactList =
-          contactMapper.ContactsListToPresentationContactList(contactList);
+          presentationContactMapper.ContactsListToPresentationContactList(contactList);
 
       view.loadContacts(presentationContactList);
     }

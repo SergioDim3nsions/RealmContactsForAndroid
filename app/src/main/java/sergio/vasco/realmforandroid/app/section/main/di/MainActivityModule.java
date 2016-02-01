@@ -6,6 +6,7 @@ import sergio.vasco.androidforexample.domain.abstractions.Bus;
 import sergio.vasco.androidforexample.domain.interactors.InteractorInvoker;
 import sergio.vasco.androidforexample.domain.interactors.main.GetContactsFromDataBaseInteractor;
 import sergio.vasco.androidforexample.domain.interactors.main.InsertContactsIntoDataBaseInteractor;
+import sergio.vasco.androidforexample.presentation.mappers.PresentationContactMapper;
 import sergio.vasco.androidforexample.presentation.sections.main.MainPresenter;
 import sergio.vasco.realmforandroid.app.di.scopes.PerActivity;
 import sergio.vasco.realmforandroid.app.domain.BusImp;
@@ -24,7 +25,7 @@ public class MainActivityModule {
     this.mainActivity = mainActivity;
   }
 
-  @PerActivity @Provides MainPresenter providedMainPresenter(Bus bus,InteractorInvoker interactorInvoker, InsertContactsIntoDataBaseInteractor insertContactsIntoDataBaseInteractor,GetContactsFromDataBaseInteractor getContactsFromDataBaseInteractor){
-    return new MainPresenter(mainActivity,bus,interactorInvoker,insertContactsIntoDataBaseInteractor,getContactsFromDataBaseInteractor);
+  @PerActivity @Provides MainPresenter providedMainPresenter(Bus bus,InteractorInvoker interactorInvoker, InsertContactsIntoDataBaseInteractor insertContactsIntoDataBaseInteractor,GetContactsFromDataBaseInteractor getContactsFromDataBaseInteractor,  PresentationContactMapper presentationContactMapper){
+    return new MainPresenter(mainActivity,bus,interactorInvoker,insertContactsIntoDataBaseInteractor,getContactsFromDataBaseInteractor, presentationContactMapper);
   }
 }

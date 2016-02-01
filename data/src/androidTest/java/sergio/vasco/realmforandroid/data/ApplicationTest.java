@@ -1,4 +1,4 @@
-package sergio.vasco;
+package sergio.vasco.realmforandroid.data;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
